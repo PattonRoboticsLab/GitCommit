@@ -1,9 +1,12 @@
 % This script commits and pushes all changes to the desired branch in a GitHub repository.
 
-function GitCommit(message)
-cd('C:\Users\loshea\MATLAB\GitCommit')
+function GitCommit(message, Path1, Path2)
+cd(Path1)
 !git pull
 disp('Test test test')
+
+cd(Path2)
+
 % CHECKS
 [status1, cmdout1] = system('git --version');         % Check if Git is installed
 status2 = ~exist('.git', 'dir');                      % Check if .git directory exists to confirm it's a Git repository
