@@ -1,4 +1,5 @@
 % This script commits and pushes all changes to the current branch in a GitHub repository.
+!git pull
 
 function GitCommit(message)
 % CHECKS
