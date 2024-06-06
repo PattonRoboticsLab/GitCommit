@@ -1,11 +1,6 @@
 % This script commits and pushes all changes to the desired branch in a GitHub repository.
 
-function GitCommit(message, Path1, Path2)
-cd(Path2)
-!git pull
-disp('Test test test')
-
-cd(Path1)
+function GitCommit(message)
 
 % CHECKS
 [status1, cmdout1] = system('git --version');         % Check if Git is installed
