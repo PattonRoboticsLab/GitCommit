@@ -11,6 +11,7 @@ To add this function to a project, perform the following steps:
 			!git pull   
 			cd(Path1)**  
    These lines of codes tells Matlab where to look for the file in Path1, navigates to the GitCommit folder (Path2), pulls any changes made to the function, and then navigates back to the main code folder (Path1).
+   Make sure to change the paths to the correct locations. 
 4. You can call the function from the Command Window or add it to the end of your code to automatically commit the changes:	
    	 **GitCommit('message')**  
   	 Change the message to whatever you want it to be.
