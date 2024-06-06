@@ -1,8 +1,7 @@
-% This script commits and pushes all changes to the current branch in a GitHub repository.
-!git pull
+% This script commits and pushes all changes to the desired branch in a GitHub repository.
 
 function GitCommit(message)
-
+!git pull
 disp('Test test test')
 % CHECKS
 [status1, cmdout1] = system('git --version');         % Check if Git is installed
