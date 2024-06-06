@@ -1,6 +1,7 @@
 % This script commits and pushes all changes to the desired branch in a GitHub repository.
 
 function GitCommit(message)
+cd('C:\Users\loshea\MATLAB\GitCommit')
 !git pull
 disp('Test test test')
 % CHECKS
