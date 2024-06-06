@@ -1,5 +1,5 @@
 # GitCommit
-
+This function assumes that your code is already associated with a git repository.  
 To add this function to a project, perform the following steps:
 1. Navigate to a folder where you want to save the function (I saved it to my C drive. C:\Users\Username\MATLAB). In the Command Window write this line of code:  
     	**!git clone https://github.com/PattonRoboticsLab/GitCommit.git**
