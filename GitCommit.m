@@ -2,6 +2,8 @@
 !git pull
 
 function GitCommit(message)
+
+disp('Test test test')
 % CHECKS
 [status1, cmdout1] = system('git --version');         % Check if Git is installed
 status2 = ~exist('.git', 'dir');                      % Check if .git directory exists to confirm it's a Git repository
