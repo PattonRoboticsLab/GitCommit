@@ -6,10 +6,10 @@ To add this function to a project, perform the following steps:
 2. In your main code, add the following lines:  
     	**Path1 = 'path/to/current/folder';  
 			Path2 = 'path/to/GitCommit/function';  
-			addpath(Path1) //tells Matlab where to look for the file  
-			cd(Path2)      //Navigates to GitCommit folder  
-			!git pull		//Pulls any changes to that code  
-			cd(Path1)		//Navigates back to main code folder**  
+			addpath(Path1) % Tells Matlab where to look for the file  
+			cd(Path2)      % Navigates to GitCommit folder  
+			!git pull      % Pulls any changes to that code  
+			cd(Path1)      % Navigates back to main code folder**  
 4. You can call the function from the Command Window or add it to the end of your code to automatically commit the changes:	
    	 **GitCommit('message')**  
   	 Change the message to whatever you want it to be.
