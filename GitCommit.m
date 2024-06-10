@@ -16,44 +16,58 @@ if status1 ~= 0 || status2 ~= 0 || status3 ~= 0
         disp(cmdout3);
     end
 end
-%=========================================================================% 
-    % If all checks pass:
-    system('git pull') %pull any recent changes from online
-    system('git add .'); % Add all files to the staging area for commit
+%=========================================================================%
+% If all checks pass:
+system('git pull') %pull any recent changes from online
+system('git add .'); % Add all files to the staging area for commit
+
+% Construct the Git commit command with the provided message
+command = ['git commit -m "' message '"'];
+system(command); % Execute the commit command
+
+% Get the name of the current branch
+[~, currBranch] = system('git rev-parse --abbrev-ref HEAD');
+currBranch = strtrim(currBranch); % Remove any leading/trailing whitespace
+
+% Ask the user if they want to push changes to the current branch
+pushCurrBranch = input(['Do you want to push changes to the current branch: ', currBranch, '? (Y/N): '], 's');
+if strcmpi(pushCurrBranch, 'Y')
+    % Push the committed changes to the current branch on the remote repository
+    system('git push -u origin HEAD');
+    disp(['Changes pushed to branch ', currBranch]);
+else
+    % List all available branches
+    [~, branchOutput] = system('git branch');
+    branches = textscan(branchOutput, '%s', 'Delimiter', '\n');
+    branches = branches{1};
     
-    % Construct the Git commit command with the provided message
-    command = ['git commit -m "' message '"']; 
-    system(command); % Execute the commit command
+    % Display branches with associated index numbers
+    disp('Available branches:');
+    for i = 1:numel(branches)
+        disp([num2str(i), ': ', branches{i}]);
+    end
     
-    % Get the name of the current branch
-    [~, currBranch] = system('git rev-parse --abbrev-ref HEAD');
-    currBranch = strtrim(currBranch); % Remove any leading/trailing whitespace
-    
-    % Ask the user if they want to push changes to the current branch
-    pushCurrBranch = input(['Do you want to push changes to the current branch: ', currBranch, '? (Y/N): '], 's');
-    if strcmpi(pushCurrBranch, 'Y')
-        % Push the committed changes to the current branch on the remote repository
-        system('git push -u origin HEAD'); 
-        disp(['Changes pushed to branch ', currBranch]);
-    else
-        % List all available branches
-        [~, branchOutput] = system('git branch');
-        branches = textscan(branchOutput, '%s', 'Delimiter', '\n');
-        branches = branches{1};
-        
-        % Display branches with associated index numbers
-        disp('Available branches:');
-        for i = 1:numel(branches)
-            disp([num2str(i), ': ', branches{i}]);
-        end
-        
-        % Ask the user if they want to push changes to any other available branch
-        pushOtherBranch = input('Do you want to push changes to any other available branch? (Y/N): ', 's');
-        if strcmpi(pushOtherBranch, 'Y')
-            % Prompt the user to select a branch by index number
-            branchIndex = input('Enter the index number of the branch to push changes to: ');
+    % Ask the user if they want to push changes to any other available branch
+    pushOtherBranch = input('Do you want to push changes to any other available branch? (Y/N): ', 's');
+    if strcmpi(pushOtherBranch, 'Y')
+        % Prompt the user to select a branch by index number
+        branchOption = input('create a new branch (N) or enter the index number of the branch to push changes to: ');
+        if strcmpi(branchOption, 'N')
+            % Prompt the user for the new branch name
+            newBranchName = input('Enter the name of the new branch: ', 's');
+            if ~isempty(newBranchName)
+                % Create and switch to the new branch
+                system(['git checkout -b ', newBranchName]);
+                % Push changes to the new branch on the remote repository
+                system(['git push -u origin ', newBranchName]);
+                disp(['Changes pushed to new branch ', newBranchName]);
+            else
+                disp('Invalid branch name.');
+            end
+        else
             
-            % Validate the input
+            % COnvert branchOption to a number and Validate the input
+            branchIndex = str2double(branchOption);
             if isscalar(branchIndex) && branchIndex >= 1 && branchIndex <= numel(branches)
                 branchName = branches{branchIndex};
                 % Switch to the selected branch
@@ -64,8 +78,9 @@ end
             else
                 disp('Invalid branch index.');
             end
-        else
-            disp('No changes were pushed.');
         end
+    else
+        disp('No changes were pushed.');
     end
+end
 end
