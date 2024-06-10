@@ -61,6 +61,10 @@ else
     branchIndex = str2double(branchOption);
     if isscalar(branchIndex) && branchIndex >= 1 && branchIndex <= numel(branches)
         branchName = branches{branchIndex};
+        % Remove the asterisk (*) from the branch name if it's there
+        if startsWith(branchName, '*')
+            branchName = branchName(2:end);
+        end
         % Switch to the selected branch
         system(['git checkout ', branchName]);
         % Push changes to the selected branch on the remote repository
