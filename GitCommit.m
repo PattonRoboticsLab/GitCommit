@@ -41,7 +41,7 @@ disp([num2str(i+1), ': Exit']);
 % Ask the user which branch to make changes to
 branchOption = input('Which branch would you like to push changes to: ', 's');
 disp(branchOption)
-if branchOption == num2str(i+1)    %Create a new branch
+if branchOption == '0'    %Create a new branch
     % Prompt the user for the new branch name
     newBranchName = input('Enter the name of the new branch: ', 's');
     if ~isempty(newBranchName)
@@ -53,9 +53,8 @@ if branchOption == num2str(i+1)    %Create a new branch
     else
         disp('Invalid branch name.');
     end
-elseif branchOption == 0
+elseif branchOption == num2str(i+1)
     disp('No changes were pushed.');
-
 else
     % Convert branchOption to a number and Validate the input
     branchIndex = str2double(branchOption);
