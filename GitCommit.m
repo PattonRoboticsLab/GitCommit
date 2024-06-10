@@ -31,7 +31,8 @@ branches = textscan(branchOutput, '%s', 'Delimiter', '\n');
 branches = branches{1};
 
 % Display branches with associated index numbers
-disp('\n Available branches (* indicates current branch):');
+disp(' ');
+disp('Available branches (* indicates current branch):');
 disp('0: Create a new branch');
 for i = 1:numel(branches)
     disp([num2str(i), ': ', branches{i}]);
