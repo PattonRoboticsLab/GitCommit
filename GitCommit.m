@@ -1,7 +1,5 @@
 % This script commits and pushes all changes to the desired branch in a GitHub repository.
-
 function GitCommit(message)
-
 % CHECKS
 [status1, cmdout1] = system('git --version');         % Check if Git is installed
 status2 = ~exist('.git', 'dir');                      % Check if .git directory exists to confirm it's a Git repository
