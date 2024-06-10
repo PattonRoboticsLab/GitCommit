@@ -30,7 +30,7 @@ system(command); % Execute the commit command
 currBranch = strtrim(currBranch); % Remove any leading/trailing whitespace
 
 % Ask the user if they want to push changes to the current branch
-pushCurrBranch = input(['Do you want to push changes to the current branch: ', currBranch, ' or create a new branch? (Y/N): '], 's');
+pushCurrBranch = input(['Do you want to push changes to the current branch: ', currBranch, '? (Y/N): '], 's');
 if strcmpi(pushCurrBranch, 'Y')
     % Push the committed changes to the current branch on the remote repository
     system('git push -u origin HEAD');
@@ -48,7 +48,7 @@ else
     end
     
     % Ask the user if they want to push changes to any other available branch
-    pushOtherBranch = input('Do you want to push changes to any other available branch? (Y/N): ', 's');
+    pushOtherBranch = input('Do you want to push changes to any other available branch or create a new branch? (Y/N): ', 's');
     if strcmpi(pushOtherBranch, 'Y')
         % Prompt the user to select a branch by index number
         branchOption = input('create a new branch (N) or enter the index number of the branch to push changes to: ');
