@@ -30,7 +30,7 @@ system(command); % Execute the commit command
 currBranch = strtrim(currBranch); % Remove any leading/trailing whitespace
 
 % Ask the user if they want to push changes to the current branch
-pushCurrBranch = input(['Do you want to push changes to the current branch: ', currBranch, '? (Y/N): '], 's');
+pushCurrBranch = input(['Do you want to push changes to the current branch: ', currBranch, ' or create a new branch? (Y/N): '], 's');
 if strcmpi(pushCurrBranch, 'Y')
     % Push the committed changes to the current branch on the remote repository
     system('git push -u origin HEAD');
