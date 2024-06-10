@@ -29,9 +29,6 @@ system(command); % Execute the commit command
 % [~, currBranch] = system('git rev-parse --abbrev-ref HEAD');
 % currBranch = strtrim(currBranch); % Remove any leading/trailing whitespace
 
-% Ask the user which branch to make changes to
-pushBranch = input('Which branch would you like to push changes to: ', 's');
-
 % List all available branches
 [~, branchOutput] = system('git branch');
 branches = textscan(branchOutput, '%s', 'Delimiter', '\n');
@@ -39,10 +36,14 @@ branches = branches{1};
 
 % Display branches with associated index numbers
 disp('Available branches:');
+disp('0: Create a new branch');
 for i = 1:numel(branches)
     disp([num2str(i), ': ', branches{i}]);
 end
-disp(num2str(i+1), ': Create a new branch');
+disp(num2str(i+1), ': Escape');
+
+% Ask the user which branch to make changes to
+pushBranch = input('Which branch would you like to push changes to: ', 's');
 
 if pushBranch == num2str(i+1)    %Create a new branch
     % Prompt the user for the new branch name
@@ -56,6 +57,9 @@ if pushBranch == num2str(i+1)    %Create a new branch
     else
         disp('Invalid branch name.');
     end
+elseif pushBranch == 0
+    disp('No changes were pushed.');
+
 else
     % Convert branchOption to a number and Validate the input
     branchIndex = str2double(branchOption);
@@ -70,7 +74,4 @@ else
         disp('Invalid branch index.');
     end
 end
-% else
-%     disp('No changes were pushed.');
-% end
 
